@@ -1,6 +1,6 @@
 import { login } from "@/server/auth/login";
 import Form from "next/form";
-
+import Link from "next/link";
 export default function Login() {
   return (
     <Form
@@ -27,6 +27,7 @@ export default function Login() {
       <button className="rounded-md bg-blue-500 p-2 text-white" type="submit">
         Login
       </button>
+      <Link href="/signup">Signup</Link>
     </Form>
   );
 }
