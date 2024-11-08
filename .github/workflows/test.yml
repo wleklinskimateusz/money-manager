@@ -11,6 +11,9 @@ jobs:
   build-and-test:
     name: my-job
     runs-on: ubuntu-latest
+    env:
+      DB_FILE_NAME: test.db
+      SESSION_SECRET: secret
     steps:
       # ...
       - uses: actions/checkout@v4
