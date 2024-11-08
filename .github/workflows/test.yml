@@ -6,9 +6,9 @@ on:
     branches:
       - main
 
-name: my-workflow
+name: test
 jobs:
-  my-job:
+  build-and-test:
     name: my-job
     runs-on: ubuntu-latest
     steps:

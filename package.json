@@ -9,23 +9,32 @@
     "start": "next start",
     "lint": "next lint",
     "format-check": "prettier --check .",
-    "test": "echo testing"
+    "test": "echo testing",
+    "drop-database": "bun scripts/drop-database.ts"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.3",
-    "@vercel/postgres": "^0.10.0",
+    "@types/better-sqlite3": "^7.6.11",
     "babel-plugin-react-compiler": "^19.0.0-beta-63b359f-20241101",
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^11.5.0",
+    "drizzle-orm": "^0.36.1",
+    "jose": "^5.9.6",
+    "neverthrow": "^8.1.1",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.2",
     "@eslint/js": "^9.14.0",
     "@next/eslint-plugin-next": "^15.0.3",
+    "@types/bcrypt": "^5.0.2",
+    "@types/bun": "^1.1.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "drizzle-kit": "^0.28.0",
     "eslint": "^9.14.0",
     "eslint-config-next": "15.0.3",
     "eslint-config-prettier": "^9.1.0",
