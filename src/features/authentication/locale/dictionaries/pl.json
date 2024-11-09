@@ -1,0 +1,43 @@
+{
+  "login": {
+    "title": "Logowanie",
+    "fields": {
+      "email": "Email",
+      "password": "Hasło"
+    },
+    "actions": {
+      "login": {
+        "text": "Zaloguj się",
+        "loadingText": "Logowanie..."
+      },
+      "signup": "Nie masz konta? Zarejestruj się"
+    },
+    "errors": {
+      "invalidPassword": "Nieprawidłowe hasło",
+      "userNotFound": "Nie znaleziono użytkownika",
+      "internalServerError": "Błąd serwera"
+    }
+  },
+  "signup": {
+    "title": "Rejestracja",
+    "fields": {
+      "email": "Email",
+      "password": "Hasło",
+      "confirmPassword": "Powtórz hasło",
+      "firstName": "Imię",
+      "lastName": "Nazwisko"
+    },
+    "actions": {
+      "signup": {
+        "text": "Zarejestruj się",
+        "loadingText": "Rejestracja..."
+      },
+      "login": "Masz już konto? Zaloguj się"
+    },
+    "errors": {
+      "userAlreadyExists": "Użytkownik już istnieje",
+      "passwordMismatch": "Hasła nie pasują do siebie",
+      "internalServerError": "Błąd serwera"
+    }
+  }
+}

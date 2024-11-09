@@ -1,4 +1,5 @@
 import { Home, Sigma } from "lucide-react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -12,22 +13,26 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
-import { logout } from "@/server/auth/logout";
+import { logout } from "@/features/authentication/actions/logout";
+import { getSharedTranslation } from "@/locale/get-shared-translation";
+import type { Locale } from "@/locale/locale";
+import { LocaleSwitcher } from "./locale-switcher";
 
-const items = [
-  {
-    title: "Dashboard",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Treasure Bonds",
-    url: "#",
-    icon: Sigma,
-  },
-];
+export async function AppSidebar({ lang }: { lang: Locale }) {
+  const { sidebar } = await getSharedTranslation(lang);
+  const items = [
+    {
+      title: sidebar.items.dashboard,
+      url: "/",
+      icon: Home,
+    },
+    {
+      title: sidebar.items.bonds,
+      url: "/bonds",
+      icon: Sigma,
+    },
+  ];
 
-export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent>
@@ -38,10 +43,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={`/${lang}${item.url}`}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -50,8 +55,13 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
+        <LocaleSwitcher
+          currentLocale={lang}
+          label={sidebar.localeSwitcher.label}
+          placeholder={sidebar.localeSwitcher.placeholder}
+        />
         <Button type="button" variant="destructive" onClick={logout}>
-          Logout
+          {sidebar.logout}
         </Button>
       </SidebarFooter>
     </Sidebar>

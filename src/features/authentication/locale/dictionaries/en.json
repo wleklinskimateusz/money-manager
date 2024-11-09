@@ -1,0 +1,43 @@
+{
+  "login": {
+    "title": "Login",
+    "fields": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "actions": {
+      "login": {
+        "text": "Login",
+        "loadingText": "Logging in..."
+      },
+      "signup": "Don't have an account? Signup"
+    },
+    "errors": {
+      "invalidPassword": "Invalid password",
+      "userNotFound": "User not found",
+      "internalServerError": "Internal server error"
+    }
+  },
+  "signup": {
+    "title": "Signup",
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "actions": {
+      "signup": {
+        "text": "Signup",
+        "loadingText": "Signing up..."
+      },
+      "login": "Already have an account? Login"
+    },
+    "errors": {
+      "userAlreadyExists": "User already exists",
+      "passwordMismatch": "Passwords do not match",
+      "internalServerError": "Internal server error"
+    }
+  }
+}

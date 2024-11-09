@@ -1,0 +1,15 @@
+{
+  "title": "Money Manager",
+  "sidebar": {
+    "items": {
+      "dashboard": "Strona główna",
+      "bonds": "Obligacje Skarbowe",
+      "settings": "Ustawienia"
+    },
+    "logout": "Wyloguj",
+    "localeSwitcher": {
+      "label": "Zmień język",
+      "placeholder": "Wyszukaj język..."
+    }
+  }
+}
