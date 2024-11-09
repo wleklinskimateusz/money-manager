@@ -1,0 +1,10 @@
+{
+  "title": "Homepage",
+  "sidebar": {
+    "items": {
+      "dashboard": "Dashboard",
+      "bonds": "Treasury Bonds",
+      "settings": "Settings"
+    }
+  }
+}

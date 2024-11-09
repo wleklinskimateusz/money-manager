@@ -1,0 +1,10 @@
+{
+  "title": "Strona główna",
+  "sidebar": {
+    "items": {
+      "dashboard": "Strona główna",
+      "bonds": "Obligacje Skarbowe",
+      "settings": "Ustawienia"
+    }
+  }
+}

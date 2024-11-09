@@ -1,14 +1,19 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
-export default function DashboardLayout({
+import { Locale } from "@/locale/locale";
+
+export default async function DashboardLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: Locale }>;
 }>) {
+  const { lang = "en" } = await params;
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar lang={lang} />
       <main>
         <SidebarTrigger />
         {children}

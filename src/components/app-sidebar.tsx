@@ -1,4 +1,5 @@
 import { Home, Sigma } from "lucide-react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -13,21 +14,24 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { logout } from "@/server/auth/logout";
+import { getDictionary } from "@/locale/dictionaries";
+import { Locale } from "@/locale/locale";
 
-const items = [
-  {
-    title: "Dashboard",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Treasure Bonds",
-    url: "#",
-    icon: Sigma,
-  },
-];
+export async function AppSidebar({ lang }: { lang: Locale }) {
+  const dict = await getDictionary(lang);
+  const items = [
+    {
+      title: dict.sidebar.items.dashboard,
+      url: "/",
+      icon: Home,
+    },
+    {
+      title: dict.sidebar.items.bonds,
+      url: "/bonds",
+      icon: Sigma,
+    },
+  ];
 
-export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent>
@@ -38,10 +42,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link locale={lang} href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

@@ -1,22 +1,20 @@
-import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { authMiddleware } from "@/server/auth/middleware";
+import { localeMiddleware } from "@/locale/middleware";
 
-const authPaths = ["/login", "/signup"];
+type MiddlewareFunction = (request: NextRequest) => NextResponse | undefined;
 
-export function middleware(request: NextRequest) {
-  const session = request.cookies.get("session");
-  const { pathname } = request.nextUrl;
-
-  if (!session && !authPaths.includes(pathname)) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  if (session && authPaths.includes(pathname)) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
-  return NextResponse.next();
+function composeMiddleware(middlewares: MiddlewareFunction[]) {
+  return async (request: NextRequest) => {
+    for (const middleware of middlewares) {
+      const result = middleware(request);
+      if (result) return result;
+    }
+    return NextResponse.next();
+  };
 }
+
+export const middleware = composeMiddleware([localeMiddleware, authMiddleware]);
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
