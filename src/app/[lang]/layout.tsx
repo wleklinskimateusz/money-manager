@@ -1,5 +1,6 @@
 import { Locale, locales } from "@/locale/locale";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ lang: locale }));
@@ -16,7 +17,10 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster position="top-center" />
+      </body>
     </html>
   );
 }

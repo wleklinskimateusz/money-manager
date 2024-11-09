@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { authMiddleware } from "@/server/auth/middleware";
+import { authMiddleware } from "@/features/authentication/server/middleware";
 import { localeMiddleware } from "@/locale/middleware";
 
 type MiddlewareFunction = (request: NextRequest) => NextResponse | undefined;

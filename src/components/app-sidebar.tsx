@@ -13,20 +13,21 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
-import { logout } from "@/server/auth/logout";
-import { getDictionary } from "@/locale/dictionaries";
-import { Locale } from "@/locale/locale";
+import { logout } from "@/features/authentication/actions/logout";
+import { getSharedTranslation } from "@/locale/get-shared-translation";
+import type { Locale } from "@/locale/locale";
+import { LocaleSwitcher } from "./locale-switcher";
 
 export async function AppSidebar({ lang }: { lang: Locale }) {
-  const dict = await getDictionary(lang);
+  const { sidebar } = await getSharedTranslation(lang);
   const items = [
     {
-      title: dict.sidebar.items.dashboard,
+      title: sidebar.items.dashboard,
       url: "/",
       icon: Home,
     },
     {
-      title: dict.sidebar.items.bonds,
+      title: sidebar.items.bonds,
       url: "/bonds",
       icon: Sigma,
     },
@@ -42,7 +43,7 @@ export async function AppSidebar({ lang }: { lang: Locale }) {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <Link locale={lang} href={item.url}>
+                    <Link href={`/${lang}${item.url}`}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
@@ -54,8 +55,13 @@ export async function AppSidebar({ lang }: { lang: Locale }) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
+        <LocaleSwitcher
+          currentLocale={lang}
+          label={sidebar.localeSwitcher.label}
+          placeholder={sidebar.localeSwitcher.placeholder}
+        />
         <Button type="button" variant="destructive" onClick={logout}>
-          Logout
+          {sidebar.logout}
         </Button>
       </SidebarFooter>
     </Sidebar>

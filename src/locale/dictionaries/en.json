@@ -1,10 +1,15 @@
 {
-  "title": "Homepage",
+  "title": "Money Manager",
   "sidebar": {
     "items": {
       "dashboard": "Dashboard",
       "bonds": "Treasury Bonds",
       "settings": "Settings"
+    },
+    "logout": "Logout",
+    "localeSwitcher": {
+      "label": "Switch Language",
+      "placeholder": "Search language..."
     }
   }
 }

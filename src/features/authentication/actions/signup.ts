@@ -3,18 +3,17 @@
 import { db } from "@/drizzle/db";
 import { users } from "@/drizzle/schema";
 import bcrypt from "bcrypt";
-import { err } from "neverthrow";
-import { InternalServerError } from "@/errors/internal-server-error";
 import { redirect } from "next/navigation";
+import { getAuthUrl } from "../navigation/get-auth-url";
+import { getLocale } from "@/locale/get-locale";
 
-export const register = async (user: {
+export const signup = async (user: {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
 }) => {
   const hashedPassword = await bcrypt.hash(user.password, 10);
-
   try {
     await db.insert(users).values({
       firstName: user.firstName,
@@ -23,8 +22,17 @@ export const register = async (user: {
       hashedPassword,
     });
   } catch (error) {
-    return err(new InternalServerError("Failed to register user", error));
+    if (error instanceof Error && error.message.includes("UNIQUE")) {
+      return {
+        statusCode: 409,
+      };
+    }
+    return {
+      statusCode: 500,
+    };
   }
 
-  redirect("/login");
+  const lang = await getLocale();
+
+  redirect(getAuthUrl(lang, "login"));
 };

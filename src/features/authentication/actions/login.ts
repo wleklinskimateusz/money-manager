@@ -3,17 +3,23 @@
 import { db } from "@/drizzle/db";
 import { roles, users, usersRoles } from "@/drizzle/schema";
 import { NotFoundError } from "@/errors/not-found";
-import { UnauthorizedError } from "@/errors/unauthorized";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcrypt";
-import { ok } from "neverthrow";
+import { ok, Result } from "neverthrow";
 import { err } from "neverthrow";
 import { SignJWT } from "jose";
 import { cookies } from "next/headers";
 import { InternalServerError } from "@/errors/internal-server-error";
 import { redirect } from "next/navigation";
 
-const getUser = async (email: string) => {
+const getUser = async (
+  email: string,
+): Promise<
+  Result<
+    { id: number; hashedPassword: string; roles: string[] },
+    InternalServerError | NotFoundError
+  >
+> => {
   let user;
   try {
     user = await db
@@ -54,12 +60,20 @@ const encryptSession = ({ id, roles }: { id: number; roles: string[] }) => {
 
 export const login = async (email: string, password: string) => {
   const userResult = await getUser(email);
-  if (!userResult.isOk()) return err(userResult.error);
+  if (!userResult.isOk())
+    return {
+      message: userResult.error.message,
+      statusCode: userResult.error.statusCode,
+    };
 
   const user = userResult.value;
 
   const isPasswordValid = await bcrypt.compare(password, user.hashedPassword);
-  if (!isPasswordValid) return err(new UnauthorizedError("Invalid password"));
+  if (!isPasswordValid)
+    return {
+      message: "invalid password",
+      statusCode: 400,
+    };
 
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
   const session = await encryptSession({
