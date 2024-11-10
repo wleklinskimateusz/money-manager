@@ -19,7 +19,7 @@ export async function decrypt(session: string | undefined = "") {
 }
 
 const sessionSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   roles: z.array(z.string()),
 });
 

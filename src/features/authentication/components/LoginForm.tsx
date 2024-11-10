@@ -8,17 +8,17 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { navigation } from "@/navigation/url";
+import { FormField } from "@/components/form-field";
 
 export const LoginForm = ({
   fields,
   actions,
-  signupUrl,
   errors,
 }: {
   fields: AuthTranslation["login"]["fields"];
   actions: AuthTranslation["login"]["actions"];
   errors: AuthTranslation["login"]["errors"];
-  signupUrl: string;
 }) => {
   return (
     <Form
@@ -36,7 +36,7 @@ export const LoginForm = ({
           toast.error(errors.userNotFound, {
             action: (
               <Button variant="link">
-                <Link href={signupUrl}>{actions.signup}</Link>
+                <Link href={navigation.signup}>{actions.signup}</Link>
               </Button>
             ),
           });
@@ -46,19 +46,19 @@ export const LoginForm = ({
         }
       }}
     >
-      <div className="flex flex-col gap-2">
+      <FormField>
         <Label htmlFor="email">{fields.email}</Label>
         <Input required type="email" name="email" />
-      </div>
-      <div className="flex flex-col gap-2">
+      </FormField>
+      <FormField>
         <Label htmlFor="password">{fields.password}</Label>
         <Input required type="password" name="password" />
-      </div>
+      </FormField>
       <SubmitButton loadingText={actions.login.loadingText}>
         {actions.login.text}
       </SubmitButton>
       <Button type="button" variant="link">
-        <Link href={signupUrl}>{actions.signup}</Link>
+        <Link href={navigation.signup}>{actions.signup}</Link>
       </Button>
     </Form>
   );

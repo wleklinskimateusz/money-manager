@@ -1,0 +1,17 @@
+{
+  "bonds": "Treasury Bonds",
+  "bondType": "Bond Type",
+  "purchaseDate": "Purchase Date",
+  "amount": "Amount",
+  "seriesName": "Series",
+  "purchaseForm": {
+    "purchaseDatePlaceholder": "Select purchase date",
+    "selectBondType": "Select bond type",
+    "selectSeries": "Select series",
+    "submit": "Add Purchase",
+    "loadingText": "Creating...",
+    "successMessage": "Bond purchase created",
+    "errorMessage": "Failed to create bond purchase",
+    "unknownErrorMessage": "Unknown error"
+  }
+}

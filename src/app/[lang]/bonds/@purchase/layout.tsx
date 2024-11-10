@@ -1,6 +1,6 @@
 import { FormLayout } from "@/components/form-layout";
 
-export default function AuthLayout({
+export default function PurchaseLayout({
   children,
 }: {
   children: React.ReactNode;

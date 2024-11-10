@@ -1,5 +1,4 @@
 import { Home, Sigma } from "lucide-react";
-import Link from "next/link";
 
 import {
   Sidebar,
@@ -9,7 +8,6 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
@@ -17,18 +15,20 @@ import { logout } from "@/features/authentication/actions/logout";
 import { getSharedTranslation } from "@/locale/get-shared-translation";
 import type { Locale } from "@/locale/locale";
 import { LocaleSwitcher } from "./locale-switcher";
+import { SidebarLink } from "./sidebar-link";
+import { navigation } from "@/navigation/url";
 
 export async function AppSidebar({ lang }: { lang: Locale }) {
   const { sidebar } = await getSharedTranslation(lang);
   const items = [
     {
       title: sidebar.items.dashboard,
-      url: "/",
+      url: navigation.dashboard,
       icon: Home,
     },
     {
       title: sidebar.items.bonds,
-      url: "/bonds",
+      url: navigation.bonds,
       icon: Sigma,
     },
   ];
@@ -42,12 +42,10 @@ export async function AppSidebar({ lang }: { lang: Locale }) {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={`/${lang}${item.url}`}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
+                  <SidebarLink href={item.url}>
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </SidebarLink>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

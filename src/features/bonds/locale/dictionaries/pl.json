@@ -1,0 +1,17 @@
+{
+  "bonds": "Obligacje Skarbowe",
+  "bondType": "Rodzaj Obligacji",
+  "purchaseDate": "Data Zakupu",
+  "amount": "Ilość",
+  "seriesName": "Seria",
+  "purchaseForm": {
+    "purchaseDatePlaceholder": "Wybierz datę zakupu",
+    "selectBondType": "Wybierz rodzaj obligacji",
+    "selectSeries": "Wybierz serię",
+    "submit": "Dodaj Zakup",
+    "loadingText": "Zapisywanie...",
+    "successMessage": "Zakup dodany",
+    "errorMessage": "Nie udało się dodać zakupu",
+    "unknownErrorMessage": "Nieznany błąd"
+  }
+}

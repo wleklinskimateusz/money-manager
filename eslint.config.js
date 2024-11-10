@@ -55,6 +55,13 @@ export default [
     files: ["src/components/ui/**/*"],
     rules: {
       "react/prop-types": "off",
+      camelcase: "off",
+    },
+  },
+  {
+    files: ["populate/**/*"],
+    rules: {
+      "no-console": "off",
     },
   },
   prettierEslintConfig,

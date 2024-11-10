@@ -1,16 +1,16 @@
-import { loadEnvConfig } from "@next/env";
 import { defineConfig } from "drizzle-kit";
+import { loadEnvConfig } from "@next/env";
+import { getConfig } from "@/config/getter";
+import { dbCredentialsSchema } from "@/drizzle/db-config";
 
-loadEnvConfig(process.cwd());
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 
-if (!process.env.DB_FILE_NAME)
-  throw new Error("DB_FILE_NAME is not defined in .env");
+const config = getConfig(dbCredentialsSchema);
 
 export default defineConfig({
-  out: "./src/drizzle/migrations",
   schema: "./src/drizzle/schema.ts",
-  dialect: "sqlite",
-  dbCredentials: {
-    url: process.env.DB_FILE_NAME,
-  },
+  dialect: "postgresql",
+  out: "src/drizzle/migrations",
+  dbCredentials: config,
 });
