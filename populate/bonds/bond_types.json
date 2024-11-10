@@ -1,1 +1,10 @@
-[{"id":1,"name":"OTS","type":"fixed"},{"id":2,"name":"ROR","type":"interest-rates"},{"id":3,"name":"DOR","type":"interest-rates"},{"id":4,"name":"TOS","type":"fixed"},{"id":5,"name":"COI","type":"inflation"},{"id":6,"name":"EDO","type":"inflation"},{"id":7,"name":"ROS","type":"inflation"},{"id":8,"name":"ROD","type":"inflation"}]
+[
+  { "id": 1, "name": "OTS", "type": "fixed" },
+  { "id": 2, "name": "ROR", "type": "interest-rates" },
+  { "id": 3, "name": "DOR", "type": "interest-rates" },
+  { "id": 4, "name": "TOS", "type": "fixed" },
+  { "id": 5, "name": "COI", "type": "inflation" },
+  { "id": 6, "name": "EDO", "type": "inflation" },
+  { "id": 7, "name": "ROS", "type": "inflation" },
+  { "id": 8, "name": "ROD", "type": "inflation" }
+]

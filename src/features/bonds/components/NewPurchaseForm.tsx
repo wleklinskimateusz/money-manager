@@ -17,11 +17,29 @@ import { SubmitButton } from "@/components/submit-button";
 import { DatePicker } from "@/components/date-picker";
 import { createBondPurchase } from "../actions/createBondPurchase";
 import { toast } from "sonner";
+import { BondsTranslation } from "../locale/get-bonds-translation";
 
 export const NewPurchaseForm = ({
   availableTypes,
+  translation: {
+    bondType,
+    purchaseDate,
+    amount,
+    seriesName,
+    purchaseForm: {
+      selectBondType,
+      selectSeries,
+      purchaseDatePlaceholder,
+      submit,
+      successMessage,
+      errorMessage,
+      unknownErrorMessage,
+      loadingText,
+    },
+  },
 }: {
   availableTypes: { name: string; id: number }[];
+  translation: BondsTranslation;
 }) => {
   const [seriesList, setSeriesList] = useState<
     { serialNumber: string; id: number }[] | null
@@ -32,28 +50,24 @@ export const NewPurchaseForm = ({
         const bondSeriesId = formData.get("seriesId");
         const amount = formData.get("amount");
         const date = formData.get("date");
-        if (!bondSeriesId || !amount || !date) {
-          toast.error("Invalid form data");
-          return;
-        }
         try {
           await createBondPurchase({
             bondSeriesId: Number(bondSeriesId),
             amount: Number(amount),
             date: new Date(date as string),
           });
-          toast.success("Bond purchase created");
+          toast.success(successMessage);
         } catch (error) {
-          toast.error("Failed to create bond purchase", {
+          toast.error(errorMessage, {
             description:
-              error instanceof Error ? error.message : "Unknown error",
+              error instanceof Error ? error.message : unknownErrorMessage,
           });
         }
       }}
-      className="flex w-full flex-col gap-4 p-4"
+      className="flex flex-col gap-4 p-4"
     >
       <FormField>
-        <Label htmlFor="bondTypeId">Bond type</Label>
+        <Label htmlFor="bondTypeId">{bondType}</Label>
         <Select
           name="bondTypeId"
           required
@@ -63,7 +77,7 @@ export const NewPurchaseForm = ({
           }}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Select bond type" />
+            <SelectValue placeholder={selectBondType} />
           </SelectTrigger>
           <SelectContent>
             {availableTypes.map((type) => (
@@ -76,10 +90,10 @@ export const NewPurchaseForm = ({
       </FormField>
 
       <FormField>
-        <Label htmlFor="seriesId">Series</Label>
+        <Label htmlFor="seriesId">{seriesName}</Label>
         <Select required disabled={!seriesList} name="seriesId">
           <SelectTrigger>
-            <SelectValue placeholder="Select series" />
+            <SelectValue placeholder={selectSeries} />
           </SelectTrigger>
           <SelectContent>
             {seriesList?.map((series) => (
@@ -91,7 +105,7 @@ export const NewPurchaseForm = ({
         </Select>
       </FormField>
       <FormField>
-        <Label htmlFor="amount">Amount</Label>
+        <Label htmlFor="amount">{amount}</Label>
         <Input
           disabled={!seriesList}
           required
@@ -102,17 +116,17 @@ export const NewPurchaseForm = ({
         />
       </FormField>
       <FormField>
-        <Label htmlFor="date">Date</Label>
+        <Label htmlFor="date">{purchaseDate}</Label>
         <DatePicker
           disabled={!seriesList}
           name="date"
           required
           id="date"
-          placeholder="Pick a date"
+          placeholder={purchaseDatePlaceholder}
         />
       </FormField>
-      <SubmitButton loadingText="Creating..." disabled={!seriesList}>
-        Create
+      <SubmitButton loadingText={loadingText} disabled={!seriesList}>
+        {submit}
       </SubmitButton>
     </Form>
   );

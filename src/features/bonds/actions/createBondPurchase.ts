@@ -3,6 +3,7 @@
 import { db } from "@/drizzle/db";
 import { bondPurchase } from "@/drizzle/schema";
 import { getCurrentUser } from "@/features/authentication/server/current-user";
+import { revalidateTag } from "next/cache";
 
 export const createBondPurchase = async ({
   bondSeriesId,
@@ -23,4 +24,5 @@ export const createBondPurchase = async ({
     purchaseDate: date,
     amount: amount,
   });
+  revalidateTag("user-bonds");
 };

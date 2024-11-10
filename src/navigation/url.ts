@@ -4,5 +4,4 @@ export const navigation = {
   signup: "/auth/signup",
   dashboard: "/dashboard",
   bonds: "/bonds",
-  bondsNewPurchase: "/bonds/new-purchase",
 };

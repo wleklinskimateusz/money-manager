@@ -55,6 +55,7 @@ export default [
     files: ["src/components/ui/**/*"],
     rules: {
       "react/prop-types": "off",
+      camelcase: "off",
     },
   },
   {

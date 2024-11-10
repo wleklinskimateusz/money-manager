@@ -18,7 +18,6 @@ function composeMiddleware(middlewares: MiddlewareFunction[]) {
 const redirectToDashboard = (request: NextRequest) => {
   const { pathname } = request.nextUrl;
   const locale = request.cookies.get("lang")?.value;
-  console.log(pathname, locale);
 
   if (pathname === `/${locale}`) {
     return NextResponse.redirect(new URL(navigation.dashboard, request.url));
