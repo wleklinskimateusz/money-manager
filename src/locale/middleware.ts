@@ -7,8 +7,8 @@ export function localeMiddleware(
   const { pathname } = request.nextUrl;
   let defaultLocale = locales[0] as Locale;
 
-  // check in headers
-  const lang = request.headers.get("accept-language")?.split(",")[0];
+  const lang = request.cookies.get("lang")?.value;
+
   if (lang && locales.includes(lang as Locale)) {
     defaultLocale = lang as Locale;
   }
@@ -19,11 +19,11 @@ export function localeMiddleware(
 
   if (!locale) {
     request.nextUrl.pathname = `/${defaultLocale}${pathname}`;
+    request.cookies.set("lang", defaultLocale);
     return NextResponse.redirect(request.nextUrl);
   }
 
-  // if different locale than in headers change the headers
-  if (locale !== defaultLocale) request.headers.set("accept-language", locale);
+  request.cookies.set("lang", locale);
 
   return undefined;
 }

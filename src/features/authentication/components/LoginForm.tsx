@@ -8,17 +8,16 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { navigation } from "@/navigation/url";
 
 export const LoginForm = ({
   fields,
   actions,
-  signupUrl,
   errors,
 }: {
   fields: AuthTranslation["login"]["fields"];
   actions: AuthTranslation["login"]["actions"];
   errors: AuthTranslation["login"]["errors"];
-  signupUrl: string;
 }) => {
   return (
     <Form
@@ -36,7 +35,7 @@ export const LoginForm = ({
           toast.error(errors.userNotFound, {
             action: (
               <Button variant="link">
-                <Link href={signupUrl}>{actions.signup}</Link>
+                <Link href={navigation.signup}>{actions.signup}</Link>
               </Button>
             ),
           });
@@ -58,7 +57,7 @@ export const LoginForm = ({
         {actions.login.text}
       </SubmitButton>
       <Button type="button" variant="link">
-        <Link href={signupUrl}>{actions.signup}</Link>
+        <Link href={navigation.signup}>{actions.signup}</Link>
       </Button>
     </Form>
   );

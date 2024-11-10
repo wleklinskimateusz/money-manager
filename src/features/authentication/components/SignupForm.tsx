@@ -8,17 +8,16 @@ import { AuthTranslation } from "../locale/get-auth-translation";
 import { SubmitButton } from "@/components/submit-button";
 import Link from "next/link";
 import { toast } from "sonner";
+import { navigation } from "@/navigation/url";
 
 export const SignupForm = ({
   fields,
   actions,
   errors,
-  loginUrl,
 }: {
   fields: AuthTranslation["signup"]["fields"];
   actions: AuthTranslation["signup"]["actions"];
   errors: AuthTranslation["signup"]["errors"];
-  loginUrl: string;
 }) => {
   return (
     <Form
@@ -46,7 +45,7 @@ export const SignupForm = ({
           toast.error(errors.userAlreadyExists, {
             action: (
               <Button variant="link">
-                <Link href={loginUrl}>{actions.login}</Link>
+                <Link href={navigation.login}>{actions.login}</Link>
               </Button>
             ),
           });
@@ -80,7 +79,7 @@ export const SignupForm = ({
         {actions.signup.text}
       </SubmitButton>
       <Button type="button" variant="link">
-        <Link href={loginUrl}>{actions.login}</Link>
+        <Link href={navigation.login}>{actions.login}</Link>
       </Button>
     </Form>
   );
