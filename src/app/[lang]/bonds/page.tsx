@@ -6,7 +6,7 @@ export default function BondsPage() {
     <div>
       <ul>
         <li>
-          <Link href={navigation.bondsAdd}>New Bond</Link>
+          <Link href={navigation.bondsNewPurchase}>New Bond</Link>
         </li>
       </ul>
     </div>

@@ -18,7 +18,7 @@ export default async function DashboardLayout({
       <body>
         <SidebarProvider>
           <AppSidebar lang={lang} />
-          <main className="relative">
+          <main className="relative w-full">
             <SidebarTrigger className="absolute left-4 top-4" />
             {children}
           </main>

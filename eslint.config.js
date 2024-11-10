@@ -57,5 +57,11 @@ export default [
       "react/prop-types": "off",
     },
   },
+  {
+    files: ["populate/**/*"],
+    rules: {
+      "no-console": "off",
+    },
+  },
   prettierEslintConfig,
 ];

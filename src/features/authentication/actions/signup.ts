@@ -4,8 +4,7 @@ import { db } from "@/drizzle/db";
 import { users } from "@/drizzle/schema";
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
-import { getAuthUrl } from "../navigation/get-auth-url";
-import { getLocale } from "@/locale/get-locale";
+import { navigation } from "@/navigation/url";
 
 export const signup = async (user: {
   firstName: string;
@@ -32,7 +31,5 @@ export const signup = async (user: {
     };
   }
 
-  const lang = await getLocale();
-
-  redirect(getAuthUrl(lang, "login"));
+  redirect(navigation.login);
 };

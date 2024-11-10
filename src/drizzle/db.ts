@@ -1,6 +1,13 @@
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { drizzle } from "drizzle-orm/node-postgres";
 
-if (!process.env.DB_FILE_NAME)
-  throw new Error("DB_FILE_NAME is not defined in .env");
+import { dbCredentialsSchema } from "./db-config";
+import { getConfig } from "@/config/getter";
+import { Client } from "pg";
 
-export const db = drizzle(process.env.DB_FILE_NAME);
+const config = getConfig(dbCredentialsSchema);
+
+const client = new Client(config);
+
+await client.connect();
+
+export const db = drizzle(client);
