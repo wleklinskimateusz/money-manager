@@ -47,3 +47,5 @@ const getBonds = async () => {
 };
 
 export { getBonds as getUserBonds };
+
+export type Bond = Awaited<ReturnType<typeof getUserBonds>>[number];
