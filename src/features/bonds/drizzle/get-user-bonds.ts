@@ -1,7 +1,12 @@
 import { db } from "@/drizzle/db";
 import { getCurrentUser } from "@/features/authentication/server/current-user";
 import { eq } from "drizzle-orm";
-import { bondPurchase, bondTypes } from "./schema";
+import {
+  bondPurchase,
+  bondSeries,
+  bondTypes,
+  fixedBondParameters,
+} from "./schema";
 import { unstable_cache as cache } from "next/cache";
 
 async function getUserBonds(userId: number) {
@@ -12,9 +17,18 @@ async function getUserBonds(userId: number) {
       seriesName: bondTypes.name,
       purchaseDate: bondPurchase.purchaseDate,
       amount: bondPurchase.amount,
+      length: bondSeries.length,
+      lengthUnit: bondSeries.lengthUnit,
+      costOfWithdrawal: bondSeries.costOfWithdrawal,
+      interestRate: fixedBondParameters.interestRate,
     })
     .from(bondPurchase)
-    .innerJoin(bondTypes, eq(bondPurchase.bondSeriesId, bondTypes.id))
+    .innerJoin(bondSeries, eq(bondPurchase.bondSeriesId, bondSeries.id))
+    .innerJoin(bondTypes, eq(bondSeries.bondTypeId, bondTypes.id))
+    .innerJoin(
+      fixedBondParameters,
+      eq(bondSeries.id, fixedBondParameters.bondSeriesId),
+    )
     .where(eq(bondPurchase.userId, userId));
 
   return result.map((bond) => ({
@@ -29,10 +43,7 @@ const cachedGetUserBonds = cache(getUserBonds, ["user-bonds"], {
 
 const getBonds = async () => {
   const user = await getCurrentUser();
-  if (user.isErr()) {
-    return [];
-  }
-  return await cachedGetUserBonds(user.value.id);
+  return await cachedGetUserBonds(user.id);
 };
 
 export { getBonds as getUserBonds };

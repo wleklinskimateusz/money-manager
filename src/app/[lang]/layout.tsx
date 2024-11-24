@@ -1,5 +1,3 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 
 import { Locale } from "@/locale/locale";
@@ -16,13 +14,7 @@ export default async function DashboardLayout({
   return (
     <html lang={lang}>
       <body>
-        <SidebarProvider>
-          <AppSidebar lang={lang} />
-          <main className="relative w-full">
-            <SidebarTrigger className="absolute left-4 top-4" />
-            {children}
-          </main>
-        </SidebarProvider>
+        {children}
         <Toaster position="top-center" />
       </body>
     </html>

@@ -3,7 +3,10 @@
   "sidebar": {
     "items": {
       "dashboard": "Dashboard",
-      "bonds": "Treasury Bonds",
+      "bonds": {
+        "title": "Treasury Bonds",
+        "addPurchase": "Add Purchase"
+      },
       "settings": "Settings"
     },
     "logout": "Logout",

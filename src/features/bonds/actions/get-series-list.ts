@@ -13,6 +13,9 @@ const getSeriesListCached = cache(
       .where(eq(bondSeries.bondTypeId, bondTypeId));
   },
   ["bond-series-list"],
+  {
+    tags: ["bond-series-list"],
+  },
 );
 
 export const getSeriesList = getSeriesListCached;

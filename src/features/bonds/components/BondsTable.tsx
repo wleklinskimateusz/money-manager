@@ -1,6 +1,7 @@
 "use client";
 
 import { DataTable } from "@/components/ui/data-table";
+import { currencyFormatter } from "@/lib/currency-format";
 import { ColumnDef, Table } from "@tanstack/react-table";
 
 export type BondsTableRow = {
@@ -40,34 +41,45 @@ export const BondsTable = ({ rows }: BondsTableProps) => {
     {
       accessorKey: "maturityDate",
       header: "Maturity Date",
+      cell: ({ row }) =>
+        Intl.DateTimeFormat("pl").format(row.original.maturityDate),
     },
     {
       accessorKey: "nominalValue",
       header: "Nominal Value",
-      footer: ({ table }) => sumColumn(table, "nominalValue"),
+      cell: ({ row }) => currencyFormatter(row.original.nominalValue),
+      footer: ({ table }) =>
+        currencyFormatter(sumColumn(table, "nominalValue")),
     },
     {
       accessorKey: "interestAmount",
       header: "Interest Amount",
-      footer: ({ table }) => sumColumn(table, "interestAmount"),
+      cell: ({ row }) => currencyFormatter(row.original.interestAmount),
+      footer: ({ table }) =>
+        currencyFormatter(sumColumn(table, "interestAmount")),
     },
     {
       accessorKey: "actualValue",
       header: "Actual Value",
-      footer: ({ table }) => sumColumn(table, "actualValue"),
+      cell: ({ row }) => currencyFormatter(row.original.actualValue),
+      footer: ({ table }) => currencyFormatter(sumColumn(table, "actualValue")),
     },
     {
       accessorKey: "interestRate",
       header: "Interest Rate",
+      cell: ({ row }) => `${row.original.interestRate}%`,
     },
     {
       accessorKey: "costOfWithdrawal",
       header: "Cost of Withdrawal",
+      cell: ({ row }) => currencyFormatter(row.original.costOfWithdrawal),
     },
     {
       accessorKey: "valueAfterCost",
       header: "Value After Cost",
-      footer: ({ table }) => sumColumn(table, "valueAfterCost"),
+      cell: ({ row }) => currencyFormatter(row.original.valueAfterCost),
+      footer: ({ table }) =>
+        currencyFormatter(sumColumn(table, "valueAfterCost")),
     },
   ] satisfies ColumnDef<BondsTableRow>[];
 

@@ -25,12 +25,19 @@ const sessionSchema = z.object({
 
 export const getCurrentUser = async () => {
   const session = (await cookies()).get("session")?.value;
+  if (!session) throw new InternalServerError("Invalid session");
+
   const decryptionResult = await decrypt(session);
-  if (!decryptionResult.isOk()) return err(decryptionResult.error);
+
+  if (!decryptionResult.isOk())
+    throw new InternalServerError("Invalid session");
 
   const parsed = sessionSchema.safeParse(decryptionResult.value);
-  if (!parsed.success)
-    return err(new InternalServerError("Invalid session", parsed.error));
+  if (!parsed.success) throw new InternalServerError("Invalid session");
 
-  return ok(parsed.data);
+  const user = parsed.data;
+
+  if (!user) throw new InternalServerError("User not found");
+
+  return user;
 };

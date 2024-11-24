@@ -14,12 +14,12 @@ export const createBondPurchase = async ({
   date: Date;
   amount: number;
 }) => {
-  const userResult = await getCurrentUser();
-  if (userResult.isErr()) {
+  const user = await getCurrentUser();
+  if (!user) {
     throw new Error("User not found");
   }
   await db.insert(bondPurchase).values({
-    userId: userResult.value.id,
+    userId: user.id,
     bondSeriesId,
     purchaseDate: date,
     amount: amount,
