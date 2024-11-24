@@ -1,4 +1,4 @@
-import { Home, Sigma } from "lucide-react";
+import { Home, Plus, Sigma } from "lucide-react";
 
 import {
   Sidebar,
@@ -19,35 +19,46 @@ import { SidebarLink } from "./sidebar-link";
 import { navigation } from "@/navigation/url";
 
 export async function AppSidebar({ lang }: { lang: Locale }) {
-  const { sidebar } = await getSharedTranslation(lang);
-  const items = [
-    {
-      title: sidebar.items.dashboard,
-      url: navigation.dashboard,
-      icon: Home,
+  const {
+    sidebar: {
+      items: { dashboard, bonds },
+      localeSwitcher,
+      logout: logoutText,
     },
-    {
-      title: sidebar.items.bonds,
-      url: navigation.bonds,
-      icon: Sigma,
-    },
-  ];
+  } = await getSharedTranslation(lang);
 
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>{dashboard}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarLink href={item.url}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </SidebarLink>
-                </SidebarMenuItem>
-              ))}
+              <SidebarMenuItem>
+                <SidebarLink href={navigation.dashboard}>
+                  <Home />
+                  <span>{dashboard}</span>
+                </SidebarLink>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>{bonds.title}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarLink href={navigation.bonds}>
+                  <Sigma />
+                  <span>{bonds.title}</span>
+                </SidebarLink>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarLink href={navigation.bondsAddPurchase}>
+                  <Plus />
+                  <span>{bonds.addPurchase}</span>
+                </SidebarLink>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -55,11 +66,11 @@ export async function AppSidebar({ lang }: { lang: Locale }) {
       <SidebarFooter>
         <LocaleSwitcher
           currentLocale={lang}
-          label={sidebar.localeSwitcher.label}
-          placeholder={sidebar.localeSwitcher.placeholder}
+          label={localeSwitcher.label}
+          placeholder={localeSwitcher.placeholder}
         />
         <Button type="button" variant="destructive" onClick={logout}>
-          {sidebar.logout}
+          {logoutText}
         </Button>
       </SidebarFooter>
     </Sidebar>

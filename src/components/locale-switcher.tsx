@@ -6,7 +6,7 @@ import { Locale } from "@/locale/locale";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Command, CommandInput, CommandItem, CommandList } from "./ui/command";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/style-utils";
 
 export const LocaleSwitcher = ({
   currentLocale,

@@ -1,8 +1,8 @@
 import { users } from "@/drizzle/user";
 import {
   integer,
-  numeric,
   pgEnum,
+  real,
   serial,
   text,
   timestamp,
@@ -42,17 +42,17 @@ export const bondSeries = pgTable("bond_series", {
   serialNumber: text("serial_number").notNull(),
   bondTypeId: serial("bond_type_id").references(() => bondTypes.id),
   issueDate: timestamp("issue_date").notNull(),
-  initialValue: numeric("initial_value").notNull(),
-  costOfWithdrawal: numeric("cost_of_withdrawal").notNull(),
+  initialValue: real("initial_value").notNull(),
+  costOfWithdrawal: real("cost_of_withdrawal").notNull(),
+  length: integer("length").notNull(),
+  lengthUnit: lengthUnit("length_unit").notNull(),
 });
 
 export const fixedBondParameters = pgTable("fixed_bond_parameters", {
   id: serial("id").primaryKey(),
   bondSeriesId: serial("bond_series_id").references(() => bondSeries.id),
-  interestRate: numeric("interest_rate").notNull(),
+  interestRate: real("interest_rate").notNull(),
   capitalisationPeriod: capitalisationPeriod("capitalisation_period").notNull(),
-  length: integer("length").notNull(),
-  lengthUnit: lengthUnit("length_unit").notNull(),
 });
 
 export const indexedBy = pgEnum("indexed_by", ["interest_rate", "inflation"]);
@@ -60,21 +60,21 @@ export const indexedBy = pgEnum("indexed_by", ["interest_rate", "inflation"]);
 export const variableBondParameters = pgTable("variable_bond_parameters", {
   id: serial("id").primaryKey(),
   bondSeriesId: serial("bond_series_id").references(() => bondSeries.id),
-  firstPeriodRate: numeric("first_period_rate").notNull(),
-  additionalRate: numeric("additional_rate").notNull(),
+  firstPeriodRate: real("first_period_rate").notNull(),
+  additionalRate: real("additional_rate").notNull(),
   indexedBy: indexedBy("indexed_by").notNull(),
 });
 
 export const inflationRate = pgTable("inflation_rate", {
   id: serial("id").primaryKey(),
   date: timestamp("date").notNull(), // point to the start of the period
-  value: numeric("value").notNull(),
+  value: real("value").notNull(),
 });
 
 export const interestRate = pgTable("interest_rate", {
   id: serial("id").primaryKey(),
   date: timestamp("date").notNull(), // point to the start of the period
-  value: numeric("value").notNull(),
+  value: real("value").notNull(),
 });
 
 export const bondPurchase = pgTable("bond_purchase", {
