@@ -2,17 +2,13 @@
   {
     "id": 2,
     "bond_series_id": 3,
-    "interest_rate": "5.95",
-    "capitalisation_period": "yearly",
-    "length": 3,
-    "length_unit": "years"
+    "interest_rate": 5.95,
+    "capitalisation_period": "yearly"
   },
   {
     "id": 3,
     "bond_series_id": 3,
-    "interest_rate": "5.95",
-    "capitalisation_period": "yearly",
-    "length": 3,
-    "length_unit": "years"
+    "interest_rate": 5.95,
+    "capitalisation_period": "yearly"
   }
 ]

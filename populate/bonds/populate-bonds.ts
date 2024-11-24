@@ -41,6 +41,8 @@ export const populateBonds = async (
       issueDate: new Date(data.issue_date),
       initialValue: data.initial_value,
       costOfWithdrawal: data.cost_of_withdrawal,
+      length: data.length,
+      lengthUnit: data.length_unit as LengthUnit,
     })),
   );
 
@@ -51,8 +53,6 @@ export const populateBonds = async (
       bondSeriesId: data.bond_series_id,
       interestRate: data.interest_rate,
       capitalisationPeriod: data.capitalisation_period as CapitalisationPeriod,
-      length: data.length,
-      lengthUnit: data.length_unit as LengthUnit,
     })),
   );
 };
