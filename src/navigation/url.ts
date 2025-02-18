@@ -5,4 +5,5 @@ export const navigation = {
   dashboard: "/",
   bonds: "/bonds",
   bondsAddPurchase: "/bonds/add-purchase",
+  budget: "/budget",
 };

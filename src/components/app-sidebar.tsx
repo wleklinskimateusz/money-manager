@@ -1,4 +1,4 @@
-import { Home, Plus, Sigma } from "lucide-react";
+import { Home, Plus, Sigma, Wallet } from "lucide-react";
 
 import {
   Sidebar,
@@ -21,7 +21,7 @@ import { navigation } from "@/navigation/url";
 export async function AppSidebar({ lang }: { lang: Locale }) {
   const {
     sidebar: {
-      items: { dashboard, bonds },
+      items: { dashboard, bonds, budget },
       localeSwitcher,
       logout: logoutText,
     },
@@ -38,6 +38,19 @@ export async function AppSidebar({ lang }: { lang: Locale }) {
                 <SidebarLink href={navigation.dashboard}>
                   <Home />
                   <span>{dashboard}</span>
+                </SidebarLink>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>{budget}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarLink href={navigation.budget}>
+                  <Wallet />
+                  <span>{budget}</span>
                 </SidebarLink>
               </SidebarMenuItem>
             </SidebarMenu>
