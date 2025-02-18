@@ -1,4 +1,4 @@
-import { users } from "@/drizzle/user";
+import { users, currency } from "@/drizzle/schema";
 import {
   integer,
   pgEnum,
@@ -46,6 +46,7 @@ export const bondSeries = pgTable("bond_series", {
   costOfWithdrawal: real("cost_of_withdrawal").notNull(),
   length: integer("length").notNull(),
   lengthUnit: lengthUnit("length_unit").notNull(),
+  currency: currency("currency").default("PLN").notNull(),
 });
 
 export const fixedBondParameters = pgTable("fixed_bond_parameters", {
