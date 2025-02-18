@@ -3,11 +3,6 @@
   "sidebar": {
     "items": {
       "dashboard": "Strona główna",
-      "bonds": {
-        "title": "Obligacje Skarbowe",
-        "addPurchase": "Dodaj zakup"
-      },
-      "budget": "Budżet",
       "settings": "Ustawienia"
     },
     "logout": "Wyloguj",

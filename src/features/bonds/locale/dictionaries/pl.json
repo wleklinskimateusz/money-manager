@@ -1,5 +1,6 @@
 {
   "bonds": "Obligacje Skarbowe",
+  "purchaseBond": "Nowy Zakup",
   "bondType": "Rodzaj Obligacji",
   "purchaseDate": "Data Zakupu",
   "amount": "Ilość",

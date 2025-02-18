@@ -1,5 +1,6 @@
 {
   "bonds": "Treasury Bonds",
+  "purchaseBond": "New Purchase",
   "bondType": "Bond Type",
   "purchaseDate": "Purchase Date",
   "amount": "Amount",

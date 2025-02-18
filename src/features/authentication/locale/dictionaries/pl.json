@@ -39,5 +39,6 @@
       "passwordMismatch": "Hasła nie pasują do siebie",
       "internalServerError": "Błąd serwera"
     }
-  }
+  },
+  "logout": "Wyloguj"
 }

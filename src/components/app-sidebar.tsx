@@ -1,4 +1,4 @@
-import { Home, Plus, Sigma, Wallet } from "lucide-react";
+import { Home } from "lucide-react";
 
 import {
   Sidebar,
@@ -10,20 +10,24 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Button } from "./ui/button";
-import { logout } from "@/features/authentication/actions/logout";
 import { getSharedTranslation } from "@/locale/get-shared-translation";
 import type { Locale } from "@/locale/locale";
 import { LocaleSwitcher } from "./locale-switcher";
 import { SidebarLink } from "./sidebar-link";
 import { navigation } from "@/navigation/url";
+import { LogoutButton } from "@/features/authentication/components/LogoutButton";
 
-export async function AppSidebar({ lang }: { lang: Locale }) {
+export async function AppSidebar({
+  lang,
+  children,
+}: {
+  lang: Locale;
+  children: React.ReactNode;
+}) {
   const {
     sidebar: {
-      items: { dashboard, bonds, budget },
+      items: { dashboard },
       localeSwitcher,
-      logout: logoutText,
     },
   } = await getSharedTranslation(lang);
 
@@ -43,38 +47,7 @@ export async function AppSidebar({ lang }: { lang: Locale }) {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>{budget}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarLink href={navigation.budget}>
-                  <Wallet />
-                  <span>{budget}</span>
-                </SidebarLink>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>{bonds.title}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarLink href={navigation.bonds}>
-                  <Sigma />
-                  <span>{bonds.title}</span>
-                </SidebarLink>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarLink href={navigation.bondsAddPurchase}>
-                  <Plus />
-                  <span>{bonds.addPurchase}</span>
-                </SidebarLink>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {children}
       </SidebarContent>
       <SidebarFooter>
         <LocaleSwitcher
@@ -82,9 +55,7 @@ export async function AppSidebar({ lang }: { lang: Locale }) {
           label={localeSwitcher.label}
           placeholder={localeSwitcher.placeholder}
         />
-        <Button type="button" variant="destructive" onClick={logout}>
-          {logoutText}
-        </Button>
+        <LogoutButton lang={lang} />
       </SidebarFooter>
     </Sidebar>
   );

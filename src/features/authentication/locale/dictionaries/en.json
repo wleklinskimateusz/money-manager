@@ -39,5 +39,6 @@
       "passwordMismatch": "Passwords do not match",
       "internalServerError": "Internal server error"
     }
-  }
+  },
+  "logout": "Logout"
 }
