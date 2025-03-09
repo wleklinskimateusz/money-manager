@@ -1,5 +1,24 @@
 {
   "title": "Budget Management",
   "overview": "Overview",
-  "description": "Your budget management dashboard will appear here."
+  "description": "Your budget management dashboard will appear here.",
+  "incomes": {
+    "title": "Income History",
+    "noData": "No income data for this period",
+    "total": "Total Income",
+    "actions": {
+      "previousYear": "Previous Year",
+      "nextYear": "Next Year"
+    },
+    "table": {
+      "month": "Month",
+      "source": "Source",
+      "gross": "Gross",
+      "net": "Net",
+      "tax": "Tax",
+      "healthInsurance": "Health Insurance",
+      "socialSecurity": "Social Security",
+      "other": "Other"
+    }
+  }
 } 

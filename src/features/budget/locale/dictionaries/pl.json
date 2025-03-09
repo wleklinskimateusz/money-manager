@@ -1,5 +1,24 @@
 {
   "title": "Zarządzanie Budżetem",
   "overview": "Przegląd",
-  "description": "Tutaj pojawi się panel zarządzania budżetem."
+  "description": "Tutaj pojawi się panel zarządzania budżetem.",
+  "incomes": {
+    "title": "Historia Przychodów",
+    "noData": "Brak danych o przychodach w tym okresie",
+    "total": "Suma Przychodów",
+    "actions": {
+      "previousYear": "Poprzedni Rok",
+      "nextYear": "Następny Rok"
+    },
+    "table": {
+      "month": "Miesiąc",
+      "source": "Źródło",
+      "gross": "Brutto",
+      "net": "Netto",
+      "tax": "Podatek",
+      "healthInsurance": "Ubezpieczenie Zdrowotne",
+      "socialSecurity": "Ubezpieczenie Społeczne",
+      "other": "Inne"
+    }
+  }
 } 

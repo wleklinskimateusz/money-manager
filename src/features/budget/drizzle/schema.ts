@@ -1,8 +1,8 @@
 import { users, currency } from "@/drizzle/schema";
 import {
-  decimal,
   pgEnum,
   pgTable,
+  real,
   serial,
   text,
   timestamp,
@@ -36,21 +36,12 @@ export const monthlyIncomes = pgTable("monthly_incomes", {
     .references(() => incomeSources.id)
     .notNull(),
   month: timestamp("month").notNull(), // First day of the month
-  grossSalary: decimal("gross_salary", { precision: 10, scale: 2 }).notNull(),
-  incomeTax: decimal("income_tax", { precision: 10, scale: 2 }).notNull(),
-  healthInsurance: decimal("health_insurance", {
-    precision: 10,
-    scale: 2,
-  }).notNull(),
-  socialSecurity: decimal("social_security", {
-    precision: 10,
-    scale: 2,
-  }).notNull(),
-  otherDeductions: decimal("other_deductions", {
-    precision: 10,
-    scale: 2,
-  }).default("0"),
-  netSalary: decimal("net_salary", { precision: 10, scale: 2 }).notNull(),
+  grossSalary: real("gross_salary").notNull(),
+  incomeTax: real("income_tax").notNull(),
+  healthInsurance: real("health_insurance").notNull(),
+  socialSecurity: real("social_security").notNull(),
+  otherDeductions: real("other_deductions").notNull().default(0),
+  netSalary: real("net_salary").notNull(),
   currency: currency("currency").default("PLN").notNull(),
   notes: text("notes"),
 });
