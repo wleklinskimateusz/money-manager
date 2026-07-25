@@ -66,7 +66,7 @@ export function IncomesList({ translation, incomes }: IncomesListProps) {
         <TableBody>
           {incomes.map((income: MonthlyIncome) => (
             <TableRow key={income.id}>
-              <TableCell>{formatDate(income.month)}</TableCell>
+              <TableCell>{formatDate(income.date)}</TableCell>
               <TableCell>{income.source}</TableCell>
               <TableCell className="text-right">{income.grossSalary}</TableCell>
               <TableCell className="text-right">{income.netSalary}</TableCell>

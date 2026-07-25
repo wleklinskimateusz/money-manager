@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/drizzle/db";
-import { monthlyIncomes, incomeSources } from "../drizzle/schema";
-import { eq, and, between } from "drizzle-orm";
+import { incomeSources, monthlyIncomes } from "../drizzle/schema";
+import { and, between, eq } from "drizzle-orm";
 import { getCurrentUser } from "@/features/authentication/server/current-user";
 import type { MonthlyIncome } from "../types";
 
@@ -16,14 +16,13 @@ export async function getIncomes(year: number): Promise<MonthlyIncome[]> {
   const incomes = await db
     .select({
       id: monthlyIncomes.id,
-      month: monthlyIncomes.month,
+      date: monthlyIncomes.date,
       source: incomeSources.name,
       grossSalary: monthlyIncomes.grossSalary,
       incomeTax: monthlyIncomes.incomeTax,
       healthInsurance: monthlyIncomes.healthInsurance,
       socialSecurity: monthlyIncomes.socialSecurity,
       otherDeductions: monthlyIncomes.otherDeductions,
-      netSalary: monthlyIncomes.netSalary,
       currency: monthlyIncomes.currency,
     })
     .from(monthlyIncomes)
@@ -34,8 +33,8 @@ export async function getIncomes(year: number): Promise<MonthlyIncome[]> {
         eq(incomeSources.userId, user.id),
       ),
     )
-    .where(and(between(monthlyIncomes.month, startDate, endDate)))
-    .orderBy(monthlyIncomes.month);
+    .where(and(between(monthlyIncomes.date, startDate, endDate)))
+    .orderBy(monthlyIncomes.date);
 
   return incomes;
 }
